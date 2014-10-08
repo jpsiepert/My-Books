@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="myBooks">
+<head>
+	<title></title>
+	
+	<link rel="stylesheet" type="text/css" href="bootstrap-3.2.0-dist/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="font-awesome-4.2.0 2/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="styles/styles.css">
+</head>
+<body ng-controller="mainCtrl">
+<div class="container">
+<div class="Navigation" >
+	<nav class="navbar nav-color navbar-fixed-top" role="navigation">
+		<form class="navbar-form">
+			<span class="navfont">Run Away to a Book</span>
+		</form>
+	</nav>
+</div>
+<div ng-view></div>
+</div>
+<script src="app/env.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-route.js"></script>
+<script type="text/javascript" src="//cdn.firebase.com/js/client/1.1.0/firebase.js"></script>
+<script type="text/javascript" src="//cdn.firebase.com/libs/angularfire/0.8.2/angularfire.min.js"></script>
+<script type="text/javascript" src="app/app.js"></script>
+<script type="text/javascript" src="app/mainCtrl.js"></script>
+<script type="text/javascript" src="app/mainService.js"></script>
+<script type="text/javascript" src="app/environmentservice.js"></script>
+<script type="text/javascript" src="app/bookservice/bookService.js"></script>
+<script type="text/javascript" src="app/login/loginCtrl.js"></script>
+<script type="text/javascript" src="app/signUp/signUpCtrl.js"></script>
+<script type="text/javascript" src="app/books/booksCtrl.js"></script>
+</body>
+</html>

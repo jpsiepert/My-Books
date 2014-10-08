@@ -1,0 +1,23 @@
+Monday: 
+	- research Amazon's API
+	- have skeleton view set up
+
+Tuesday: 
+	- have router built
+	- have loading directive implemented
+	- have services built
+
+Wednesday: 
+ - Build views/controllers for :
+ 	- books recommended
+ 	- books to read
+ 	- books owned
+ 	- books read
+ - be able to move books from one list to another
+ Thursday: 
+ 	- be able to "star" (make favorite) books
+ 	- be able to move books from search list to other lists
+ Friday:
+  - be able to add comments under books
+  - work on CSS styling
+  - implement an API that can serach for books

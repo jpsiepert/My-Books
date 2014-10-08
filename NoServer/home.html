@@ -1,0 +1,28 @@
+<div class="Navigation" >
+	<nav class="navbar nav-color navbar-fixed-top" role="navigation">
+		<form class="navbar-form">
+			<span class="navfont">Run Away to a Book</span>
+			
+			<div class="login-form" ng-show="loginForm">
+				<form name="loginForm">
+					<input type="email" placeholder="enter e-mail" name="loginemail" ng-model="login.email" required/>
+
+					<p ng-if="loginForm.loginemail.$error.required && loginForm.loginemail.$dirty">Please enter e-mail</p>
+					<input type="password" placeholder="password" name="loginPassword" ng-model="login.password" required/>
+
+					<p ng-if="loginForm.loginPassword.$error && loginForm.loginPassword.$dirty">Please enter password</p>
+					
+					<button class="btn btn-login-fn" ng-submit="openUp()">Log In!</button>
+				</form>
+
+			</div>
+			<div ng-show="mainbuttons">
+				
+				<button class="btn btn-sign-up" ng-click="gotoSignUp()">Sign Up!</button>
+				
+				<button class="btn btn-log-in" ng-show-"loginbutton" ng-click="showloginForm()">Log In!</button>
+
+			</div>
+		</form>
+	</nav>
+</div>

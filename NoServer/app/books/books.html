@@ -1,0 +1,33 @@
+	<div class="Navigation">
+		<nav class="navbar nav-color navbar-fixed-top" role="navigation"><!-- {{test}}{{env}} -->
+			<form class="navbar-form">
+				
+				<span class="navfont">Run Away to a Book</span>
+				<!-- {{thing}} -->
+				
+				<button class="btn btn-own" ng-click="gotoOwn()">Own</button>
+				
+				<button class="btn btn-recs" ng-click="gotoRecommendations()">Recommendations</button>
+				
+				<button class="btn btn-read" ng-click="gotoRead()">Read</button>
+				
+				<button class="btn btn-to-read" ng-click="gotoToRead()">To Read</button>
+			</form>
+			
+			<form class="search-books">
+				
+				<input class="panel" type="text" placeholder="search" ng-model="search">
+			
+			</form>
+		</nav>
+		<div class="row recommended">
+				<div class="col-md-9">
+					<input type="text" ng-model="bookRec" placeholder="Add a Book" />
+					<input type="text" ng-model="filter" placeholder="search" />
+						<ul>
+							<li ng-repeat="book in books | filter: filter"></li>
+						</ul>
+				</div>
+			</div>
+	</div>
+

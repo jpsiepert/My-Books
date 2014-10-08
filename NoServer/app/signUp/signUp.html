@@ -1,0 +1,17 @@
+<div class="signupform"> 
+<form name="signupForm">
+	
+	<input type="text" name="signupName" ng-model="signUp.name" placeholder="Enter name" required>
+
+	<p ng-if="signupForm.signupName.$error && signupForm.signupName.$dirty">Please Enter your name </p>
+
+	<input type="email" name="signupEmail" ng-model="signUp.email" placeholder="please enter e-mail" required><p ng-if="signupForm.signupEmail.$error.required && signupForm.signupEmail.$dirty">Please enter a valid e-mail</p>
+	
+	<input type="password" name="signupPassword" ng-model="signUp.password" ng-minlength="8" placeholder="choose a password"><p ng-if="signupForm.signup.$error && signupForm.signupPassword.$dirty">Please enter a password of 8 or more characters</p>
+	
+	<button class="btn btn-sign-up" ng-click="register()">Sign Up!</button>
+</form>
+</div>
+
+
+

@@ -1,0 +1,73 @@
+html {
+	background-image: url(Reading-A-Book-Pictures.jpg); 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 100%;
+  min-width: 100%;
+}
+
+body {
+	padding-top: 100px;
+	background: transparent;
+}
+
+.nav-color {
+ background-color:#FFD500;
+}
+
+.navfont{
+	font-family: cursive;
+	font-size: 30px;
+	text-align: center;
+	color: #170871 
+}
+
+nav button {
+	float: right;
+	margin-right: 10px;
+}
+
+.btn-sign-up {
+	background: #1ED86F;
+	margin-top: 4px;
+}
+span {
+	display: inline-block;
+}
+.btn-log-in {
+	background: #4F628E;
+	margin-top: 4px;
+}
+
+.btn-login-fn {
+	background: #2D882D;
+	margin-top: 4px;
+}
+
+.btn-recs {
+ background: #B04441;
+}
+
+.btn-to-read {
+	background: #FFB2B0;
+}
+
+.btn-read {
+	background: #DB7674;
+}
+
+.btn-own {
+	background: #871D1A;
+}
+
+.search-books {
+	margin-left: 10px;
+}
+
+.recommended {
+	border: 1px solid red;
+}
