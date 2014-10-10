@@ -1,6 +1,6 @@
 var app = angular.module("myBooks");
 
-app.controller("booksCtrl", function($scope, bookService, booksReference, userReference){
+app.controller("booksCtrl", function($scope, $location, mainService, bookService, booksReference, userReference, commentsReference){
   
   $scope.user = userReference;
   $scope.addBookForm = true;
@@ -10,6 +10,9 @@ app.controller("booksCtrl", function($scope, bookService, booksReference, userRe
   $scope.read = false;
   $scope.own = false;
   $scope.searchItunes = false;
+  $scope.bookDetails = false;
+
+
 
   $scope.showAddBook = function(){
     $scope.addBookForm = !$scope.addBookForm
@@ -49,15 +52,20 @@ $scope.gridOptions = {
       data: 'bookData',
       filterOptions: $scope.filterOptions,
       height: '110px',
-      sortInfo: {fields: ["Artist, Collection", "AlbumArt"], directions:["asc"]},
+      sortInfo: {fields: ["Artist, Collection", "AlbumArt", "Add Book"], directions:["asc"]},
       columnDefs: [
         {field: 'Artist', displayName: 'Author'},
         {field: 'Collection', displayName: 'Title'},
-        {field: "AlbumArt", displayName: "Book Art", cellTemplate: '<div class="ngCellText" ng-class="col.colIndex()"><img ng-src="{{row.getProperty(col.field)}}"></div>'}
+        {field: "AlbumArt", displayName: "Book Art", cellTemplate: '<div class="ngCellText" ng-class="col.colIndex()"><img ng-src="{{row.getProperty(col.field)}}"></div>'},
+        {field: "AddBook", displayName: "Add Book", }
       ],
     };
 
  var displayBookArray = [];
+ var addBookToList = function(){
+  //needs to take active column
+  //add the author, book name, book art to list(i.e. owned, or read)
+ }
   
  $scope.bookData = displayBookArray; 
  
@@ -83,7 +91,15 @@ $scope.gridOptions = {
   this.Collection = obj.trackName;
   this.Artist = obj.artistName;
  }
+  
+  $scope.logOut = function(){
+    debugger;
+    mainService.logOut()
+    $location.path("/")
+  }
+
   $scope.books = booksReference
+
 
   $scope.addBook = function(){
     debugger;
@@ -96,7 +112,13 @@ $scope.gridOptions = {
   $scope.updateBook = function(book){
     debugger;
     $scope.books.$save(book);
-    $scope.book = '';
   }
 
+  $scope.showBookDetails = function(book){
+    $location.path("/mybooks/:" + userId + "books/:" +bookId)
+    debugger;
+    $scope.user.uid = $scope.user.uid.replace("simplelogin:", '')
+    $scope.comments = mainService.getComments($scope.user.uid, book.$id)
+
+  }
 })

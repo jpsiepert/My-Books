@@ -19,7 +19,15 @@ app.config(function($routeProvider){
 				return mainService.getBooks($route.current.params.userId);
 			}
 		}
-	});
+	}).when("/mybooks/:userId/books/:bookId" {
+		templateUrl: "book.html",
+		controller: "bookCtrl", 
+		resolve: {
+			commentsReference: function(mainService, $route){
+				return mainService.getComments($route.current.params.userId, $route.current.params.bookId);
+			}
+		}
+	})
 	// }).when("/recommended/:userId",{ //do i need to call, getUser?? {
 	// 	templateUrl: "/app/books/recommended.html",
 	// 	controller: "booksCtrl",

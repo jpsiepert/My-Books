@@ -1,24 +1,28 @@
 <div class="Navigation" >
 	<nav class="navbar nav-color navbar-fixed-top" role="navigation">
 		<form class="navbar-form" novalidate>
-			<span><p class="navfont">Run Away to a Book</p>
-			
+			<span><p class="navfont">Run Away to a Book</p></span>
 			<div class="login-form" ng-show="loginForm">
 				<form name="loginForm" novalidate>
 					<input type="email" placeholder="enter e-mail" name="loginemail" ng-model="login.email" required/>
 
 					<p ng-if="loginForm.loginemail.$error.required && loginForm.loginemail.$dirty">Please enter e-mail</p>
+					
 					<input type="password" placeholder="password" name="loginPassword" ng-model="login.password" required/>
 
 					<p ng-if="loginForm.loginPassword.$error.required && loginForm.loginPassword.$dirty">Please enter password</p>
 					
-					<button ng-disbled="loginForm.$invalid"class="btn btn-login-fn" ng-click="openUp()">Log In!</button>
-					<button class="btn btn-cancel" ng-click="showloginForm()">Cancel</button>
+					<br />
+					
+					<button ng-disbled="loginForm.$invalid" ng-click="openUp()">Log In!</button>
+					
+					<button ng-click="showloginForm()">Cancel</button>
 				</form>
-				</span>
 
 			</div>
-			<div ng-show="mainbuttons">
+			
+			
+			<div class="main-buttons" ng-show="mainbuttons">
 				
 				<button class="btn btn-sign-up" ng-click="gotoSignUp()">Sign Up!</button>
 				

@@ -5,7 +5,10 @@ app.service("mainService", function($firebase){
 	var fbUrl = "https://boiling-heat-705.firebaseio.com/";
 	
 	var fbLogin = new Firebase(fbUrl);
-	
+
+	this.logOut = function(){
+		fbLogin.unauth()
+	}
  this.register = function(user, cb){
 		fbLogin.createUser({
 			email: user.email,
@@ -54,12 +57,19 @@ app.service("mainService", function($firebase){
 		});
 	}
 
+	
+
 	this.getUser = function(userId){
 		return $firebase(new Firebase(fbUrl + 'users/' + userId)).$asObject();
 	}
 
 	this.getBooks = function(userId){
 		return $firebase(new Firebase(fbUrl + 'users/' + userId + '/books')).$asArray();	
+	}
+
+	this.getComments = function(userId, bookId){
+		
+		return $firebase(new Firebase(fbUrl + 'users/' + userId + '/books' + bookId + "/comments")).$asArray();
 	}
 
 })

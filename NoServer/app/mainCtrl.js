@@ -11,8 +11,9 @@ app.controller("mainCtrl", function($scope, $location, mainService, EnvironmentS
 
  $scope.showloginForm = function(){
  	console.log("showing form")
- 	$scope.loginForm = true;
- 	$scope.mainbuttons = false;
+ 	$scope.loginForm = !$scope.loginForm
+ 	$scope.mainbuttons = !$scope.mainbuttons
+ 	$scope.login = ''
  };
 
  
