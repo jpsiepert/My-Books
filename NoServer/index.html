@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html ng-app="myBooks">
 <head>
-	<title></title>
+	<title>Book List</title>
 	
 	<link rel="stylesheet" type="text/css" href="bootstrap-3.2.0-dist/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="font-awesome-4.2.0 2/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="styles/styles.css">
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/ng-grid/2.0.11/ng-grid.css">	<link rel="stylesheet" type="text/css" href="styles/styles.css">
 </head>
 <body ng-controller="mainCtrl">
 <div class="container">
@@ -19,10 +19,13 @@
 <div ng-view></div>
 </div>
 <script src="app/env.js"></script>
+<script src="bower_components/jquery/dist/jquery.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-route.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/ng-grid/2.0.11/ng-grid.min.js"></script>
 <script type="text/javascript" src="//cdn.firebase.com/js/client/1.1.0/firebase.js"></script>
 <script type="text/javascript" src="//cdn.firebase.com/libs/angularfire/0.8.2/angularfire.min.js"></script>
+
 <script type="text/javascript" src="app/app.js"></script>
 <script type="text/javascript" src="app/mainCtrl.js"></script>
 <script type="text/javascript" src="app/mainService.js"></script>

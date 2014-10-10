@@ -13,7 +13,10 @@ html {
 body {
 	padding-top: 100px;
 	background: transparent;
+	text-align: center;
+	
 }
+
 
 .nav-color {
  background-color:#FFD500;
@@ -35,7 +38,7 @@ nav button {
 	background: #1ED86F;
 	margin-top: 4px;
 }
-span {
+span 
 	display: inline-block;
 }
 .btn-log-in {
@@ -46,6 +49,7 @@ span {
 .btn-login-fn {
 	background: #2D882D;
 	margin-top: 4px;
+	margin: 0 auto;
 }
 
 .btn-recs {
@@ -68,6 +72,68 @@ span {
 	margin-left: 10px;
 }
 
-.recommended {
-	border: 1px solid red;
+.book-list {
+	border: 1px solid white;
+	background: rgba(90, 90, 110, .7);
+	color: white;
+	min-height: 250px;
+}
+
+.book-columns {
+	color: #fff;
+}
+
+li {
+	list-style-type: none;
+}
+
+input {
+	color: black;
+}
+
+h1 {
+	text-align: center;
+}
+
+h3 {
+	text-align: center;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+.gridStyle {
+    border: 1px solid rgb(212,212,212);
+    width: 100%; 
+    height: 1200px;
+    min-height: 100%;
+}
+
+.ngTopPanel {
+  line-height: 25px;
+}
+
+.ngCell  {
+  display : table-cell;
+  height: auto !important;
+  overflow:visible;
+  position: static;
+}
+
+.ngRow {
+  display : table-row;
+  height: auto !important;
+  position: static;
+}
+
+.ngCellText{
+  height: auto !important;
+  white-space: normal;
+  overflow:visible;
+}
+
+.ngGrid.unselectable {
+  margin-top: 10px;
 }

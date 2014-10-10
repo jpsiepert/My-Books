@@ -5,11 +5,11 @@ app.service("bookService", function($http, $q){
 		var deferred = $q.defer();
 		$http({
 			method: "JSONP",
-			url: "https://itunes.apple.com/search?term=" + search.author +"&entity=eBook" //search type can be eBook or audiobook, need a drop down??
-		}).then(function(bookData){
-			bookData = data.data.results
-			deferred.resolve(bookData)
+			url: "https://itunes.apple.com/us/search?term=" + search.query  + "&media=ebook&callback=JSON_CALLBACK"//search type can be eBook or audiobook, need a drop down??
+		}).then(function(data){
+			iTunesData = data.data.results
+			deferred.resolve(iTunesData)
 		})
 		return deferred.promise;
 	}
-})
+}) 

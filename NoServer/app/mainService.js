@@ -18,7 +18,7 @@ app.service("mainService", function($firebase){
 						password : user.password
 					}, function(err, authData) {
 				  if (authData) {
-				  	authData.name = user.name || '';
+				  	authData.name = user.name;
 				  	authData.userId = authData.uid.replace("simplelogin:", "");
 				    fbLogin.child('users').child(authData.uid.replace('simplelogin:', '')).set(authData);
 				    cb(authData);
@@ -58,8 +58,8 @@ app.service("mainService", function($firebase){
 		return $firebase(new Firebase(fbUrl + 'users/' + userId)).$asObject();
 	}
 
-	this.getThings = function(userId){
-		return $firebase(new Firebase(fbUrl + 'users/' + userId + '/things')).$asArray();	
+	this.getBooks = function(userId){
+		return $firebase(new Firebase(fbUrl + 'users/' + userId + '/books')).$asArray();	
 	}
 
 })
