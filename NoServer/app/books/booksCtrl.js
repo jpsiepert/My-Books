@@ -1,8 +1,7 @@
 var app = angular.module("myBooks");
 
-app.controller("booksCtrl", function($scope, $location, mainService, bookService, booksReference, userReference, commentsReference){
-  
-  $scope.user = userReference;
+app.controller("booksCtrl", function($scope, $location, mainService, bookService, booksReference){
+
   $scope.addBookForm = true;
   $scope.mainbuttons = false;
   $scope.recommended = false;
@@ -11,7 +10,7 @@ app.controller("booksCtrl", function($scope, $location, mainService, bookService
   $scope.own = false;
   $scope.searchItunes = false;
   $scope.bookDetails = false;
-
+  $scope.itunesButton = true;
 
 
   $scope.showAddBook = function(){
@@ -57,7 +56,7 @@ $scope.gridOptions = {
         {field: 'Artist', displayName: 'Author'},
         {field: 'Collection', displayName: 'Title'},
         {field: "AlbumArt", displayName: "Book Art", cellTemplate: '<div class="ngCellText" ng-class="col.colIndex()"><img ng-src="{{row.getProperty(col.field)}}"></div>'},
-        {field: "AddBook", displayName: "Add Book", }
+        {field: "AddBook", displayName: "Add Book", cellTemplate: '<button ng-show="itunesButton" ng-click="addItunesBook($index)">Add Book</button>'}
       ],
     };
 
@@ -83,7 +82,8 @@ $scope.gridOptions = {
       $scope.bookData = displayBookArray;
     })
   }
-  $scope.searchItunes = true;
+  
+  $scope.searchItunes = !scope.searchItunes
  }
 
  var BookConst = function(obj){
@@ -100,6 +100,10 @@ $scope.gridOptions = {
 
   $scope.books = booksReference
 
+  $scope.addItunesBook = function(index){
+    $scope.books.$add(displayBookArray[index]);
+    // $scope.itunesButton = false;
+  }
 
   $scope.addBook = function(){
     debugger;
@@ -115,10 +119,10 @@ $scope.gridOptions = {
   }
 
   $scope.showBookDetails = function(book){
-    $location.path("/mybooks/:" + userId + "books/:" +bookId)
     debugger;
-    $scope.user.uid = $scope.user.uid.replace("simplelogin:", '')
-    $scope.comments = mainService.getComments($scope.user.uid, book.$id)
+    
+    $scope.comments = mainService.getComments($scope.user.userId, book.$id)
+    $location.path("/mybooks/" + $scope.user.userId + "/books/" + book.$id)
 
   }
 })

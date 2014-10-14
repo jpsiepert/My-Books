@@ -8,6 +8,12 @@ app.controller("mainCtrl", function($scope, $location, mainService, EnvironmentS
  //moved the buttons to home.html instead of the index.html
  
  $scope.loginForm = false;
+ $scope.theSignUpForm = false;
+
+  $scope.showSignupForm = function(){
+ 		$scope.theSignUpForm = !$scope.theSignUpForm
+ 		$scope.mainbuttons = false;
+ }
 
  $scope.showloginForm = function(){
  	console.log("showing form")
@@ -15,21 +21,30 @@ app.controller("mainCtrl", function($scope, $location, mainService, EnvironmentS
  	$scope.mainbuttons = !$scope.mainbuttons
  	$scope.login = ''
  };
-
+$scope.register = function(){
+  return mainService.register($scope.signUp, function(user){
+    user.uid = user.uid.replace('simplelogin:', '');
+    $scope.$apply(function(){
+      return $location.path("/mybooks/" + user.uid)
+    });
+  });
+  $scope.signUp = ''
+}
  
 
-$scope.gotoSignUp=function(){
- 	$location.path("/signup")
- 	$scope.mainbuttons = false;
- };
+// $scope.gotoSignUp=function(){
+// 	console.log("going to sign up")
+//  	$location.path("/signup")
+//  	$scope.mainbuttons = false;
+//  };
 
 $scope.openUp = function(){
  	console.log("anything")
  	return mainService.login($scope.login, function(user){
  		user.uid = user.uid.replace('simplelogin:', '')
-  	$scope.$apply(function(){
-  		$location.path("/mybooks/" + user.uid)
-  	})
+	  	$scope.$apply(function(){
+	  		return $location.path("/mybooks/" + user.uid)
+	  	})
 	});
 	$scope.login.email = '';
 	$scope.login.password = '';

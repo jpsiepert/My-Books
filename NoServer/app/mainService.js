@@ -7,8 +7,23 @@ app.service("mainService", function($firebase){
 	var fbLogin = new Firebase(fbUrl);
 
 	this.logOut = function(){
+		localStorage.setItem('user', '');
 		fbLogin.unauth()
 	}
+
+	var setUser = function(user){
+		user.uid = user.uid.replace('simplelogin:', '');
+		localStorage.setItem('user', JSON.stringify(user));
+	};
+
+	this.getAuth = function(){
+		if(localStorage.getItem('user')){
+			return JSON.parse(localStorage.getItem('user'));
+		} else {
+			return false;
+		}
+	};
+
  this.register = function(user, cb){
 		fbLogin.createUser({
 			email: user.email,
@@ -24,6 +39,7 @@ app.service("mainService", function($firebase){
 				  	authData.name = user.name;
 				  	authData.userId = authData.uid.replace("simplelogin:", "");
 				    fbLogin.child('users').child(authData.uid.replace('simplelogin:', '')).set(authData);
+				    setUser(authData);
 				    cb(authData);
 				  } else {
 				  	console.log('something went wrong');
@@ -52,6 +68,7 @@ app.service("mainService", function($firebase){
 			} else if (authData) {
 			    // user authenticated with Firebase
 			    console.log("Logged In! User ID: " + authData.uid);
+			    setUser(authData);
 			    cb(authData); //gives the authenticated user to our callback
 			}
 		});

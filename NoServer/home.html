@@ -24,11 +24,28 @@
 			
 			<div class="main-buttons" ng-show="mainbuttons">
 				
-				<button class="btn btn-sign-up" ng-click="gotoSignUp()">Sign Up!</button>
+				<button class="btn btn-sign-up" ng-click="showSignupForm()">Sign Up!</button>
 				
 				<button class="btn btn-log-in" ng-show-"loginbutton" ng-click="showloginForm()">Log In!</button>
 
 			</div>
 		</form>
 	</nav>
+	<div class="signupform" ng-show="theSignUpForm"> 
+	<form name="signupForm" novalidate>
+	
+	<input type="text" name="signupName" ng-model="signUp.name" placeholder="Enter name" required>
+
+	<p ng-if="signupForm.signupName.$error.required && signupForm.signupName.$dirty">Please Enter your name </p>
+
+	<input type="email" name="signupEmail" ng-model="signUp.email" placeholder="please enter e-mail" required>
+
+	<p ng-if="signupForm.signupEmail.$error.required && signupForm.signupEmail.$dirty">Please enter a valid e-mail</p>
+	
+	<input type="password" name="signupPassword" ng-model="signUp.password" ng-minlength="8" placeholder="choose a password" required><p ng-if="signupForm.signup.$error.required && signupForm.signupPassword.$dirty">Please enter a password of 8 or more characters</p>
+	<br/>
+	<button  ng-disabled="signupForm.$invalid" class="btn btn-sign-up" ng-click="register()">Sign Up!</button>
+	
+</form>
+</div>
 </div>
