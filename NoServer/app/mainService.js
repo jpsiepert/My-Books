@@ -85,8 +85,11 @@ app.service("mainService", function($firebase){
 	}
 
 	this.getComments = function(userId, bookId){
-		
 		return $firebase(new Firebase(fbUrl + 'users/' + userId + '/books' + bookId + "/comments")).$asArray();
+	}
+
+	this.getIBooks = function(userId){
+		return $firebase(new Firebase(fbUrl + '/users/' + userId + '/iBooks')).$asArray();
 	}
 
 })

@@ -22,9 +22,13 @@ app.config(function($routeProvider){
 		controller: "booksCtrl",
 		resolve: {
 			booksReference: function(mainService, $route){
-				return mainService.getBooks($route.current.params.userId);
+				return mainService.getBooks($route.current.params.userId)
+			},
+			iBooksReference: function(mainService, $route){
+				return mainService.getIBooks($route.current.params.userId)
 			}
 		}
+		
 	}).when("/mybooks/:userId/books/:bookId", {
 		templateUrl: "/app/book/book.html",
 		controller: "bookCtrl", 

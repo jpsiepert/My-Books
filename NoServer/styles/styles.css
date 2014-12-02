@@ -1,5 +1,5 @@
 html {
-	background-image: url(Reading-A-Book-Pictures.jpg); 
+  background-image: url(books-to-read.jpg); 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -39,8 +39,10 @@ nav button {
 	background: #1ED86F;
 	
 }
-span 
+span {
 	display: inline-block;
+}
+
 }
 .btn-log-in {
 	background: #4F628E;
@@ -111,6 +113,10 @@ h1 {
 h3 {
 	text-align: center;
 }
+
+a:hover{
+	cursor: pointer;
+}
 .welcome-greeting {
 	text-align: center;
 	
@@ -129,14 +135,23 @@ h3 {
 
 .book-list {
 	border: 1px solid white;
-	background: rgba(90, 90, 110, .7);
+	/*background: rgba(90, 90, 110, .7);*/
 	color: white;
-	min-height: 250px;
+	padding-left: 13px;
+	/*min-height: 250px;
 	width: auto;
 	float: inherit;
-	color: white;
+	color: white;*/
 }
 
+.book-list-item {
+	background: rgba(255, 213, 0, .8);
+
+}
+
+.book-list-item a{
+	color: #B04441;
+}
 button {
 	color: black;
 }
@@ -178,4 +193,8 @@ html, body {
 
 .ngGrid.unselectable {
   margin-top: 10px;
+}
+
+.search-itune-books {
+	float: left;
 }

@@ -1,13 +1,13 @@
 var app = angular.module("myBooks");
 
-app.controller("booksCtrl", function($scope, $location, mainService, bookService, booksReference){
+app.controller("booksCtrl", function($scope, $location, mainService, bookService, booksReference, iBooksReference){
 
   $scope.addBookForm = true;
   $scope.mainbuttons = false;
-  $scope.recommended = false;
-  $scope.toRead = false;
-  $scope.read = false;
-  $scope.own = false;
+  $scope.recommended = true;
+  $scope.toRead = true;
+  $scope.read = true;
+  $scope.own = true;
   $scope.searchItunes = false;
   $scope.bookDetails = false;
   $scope.itunesButton = true;
@@ -74,7 +74,6 @@ $scope.gridOptions = {
     bookService.getBookData($scope.search)
     .then(function(iTunesData){
       $scope.bookData = iTunesData;
-      console.log($scope.bookData);
       for(var i=0; i < $scope.bookData.length; i++) {
         var tempObj = new BookConst($scope.bookData[i], i)
         displayBookArray.push(tempObj);
@@ -93,17 +92,15 @@ $scope.gridOptions = {
  }
   
   $scope.logOut = function(){
-    debugger;
     mainService.logOut()
     $location.path("/")
   }
 
   $scope.books = booksReference
-  $scope.iBooks = [];
+  $scope.iBooks = iBooksReference;
 
   $scope.addItunesBook = function(i){
-    console.log("i", i)
-    $scope.iBooks.push(displayBookArray[i]);
+    $scope.iBooks.$add(displayBookArray[i]);
     $scope.addBookForm = false;
     $scope.searchItunes = false;
     $scope.search.query = '';
@@ -111,21 +108,18 @@ $scope.gridOptions = {
   }
 
   $scope.addBook = function(iBook, i){
-    debugger;
     $scope.books.$add(iBook)
     $scope.book = '';
-    $scope.iBooks.splice(i, 1)
+    $scope.iBooks.$remove(iBook)
   }
   $scope.removeBook = function(book){
     $scope.books.$remove(book);
   }
   $scope.updateBook = function(book){
-    debugger;
     $scope.books.$save(book);
   }
 
   $scope.showBookDetails = function(book){
-    debugger;
     
     $scope.comments = mainService.getComments($scope.user.userId, book.$id)
     $location.path("/mybooks/" + $scope.user.userId + "/books/" + book.$id)
