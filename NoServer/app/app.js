@@ -6,7 +6,6 @@ app.run(function($rootScope, mainService, $location, $route){
 		if(mainService.getAuth()){
 			var authUser = mainService.getAuth();
 			$rootScope.user = mainService.getUser(authUser.uid);
-			console.log($rootScope.user);
 		} else {
 			$location.path("/")
 		}

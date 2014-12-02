@@ -29,7 +29,7 @@
 
 		<div class="panel panel-default" ng-if="searchItunes">
       <div class="panel-heading"> Your Search Results:</div>
-     <div class="gridStyle" ng-grid="gridOptions | filter: filterOption.filterText" swap-image="defaultInfo.search"></div>
+     <div class="gridStyle" ng-grid="gridOptions | filter: filterOptions.filterText" swap-image="defaultInfo.search"></div>
     </div>
 
   
@@ -47,18 +47,18 @@
 		<button ng-click="addBook()">Add Book to List</button>
 			<br />
 			<ul>
-			<li ng-repeat="book in books ">
-				{{book.name}}
-				<img src="{{book.AlbumArt}}"/>
+			<li ng-repeat="iBook in iBooks ">
+				{{iBook.name}}
+				<img src="{{iBook.AlbumArt}}"/>
 				<!-- {{book.Artist}}
 				{{book.Collection}} 
 				| filter: {own: false} | filter: {toRead: false} | filter: {read: false} | filter: {recommended: false}-->
 				
 			<div ng-class="check-boxes">
-				Own: <input type="checkbox" ng-model="book.own" ng-change="updateBook(book)"/>
-				Read: <input type = "checkbox" id="tyler" ng-model="book.read" ng-change="updateBook(book)"/>
-				To Read: <input type="checkbox" ng-model="book.toRead" ng-change="updateBook(book)"/>
-				Recommended: <input type="checkbox" ng-model="book.recommended" ng-change="updateBook(book)"/>	
+				Own: <input type="checkbox" ng-model="iBook.own" ng-change="addBook(iBook, $index)"/>
+				Read: <input type = "checkbox" id="tyler" ng-model="iBook.read" ng-change="addBook(iBook, $index)"/>
+				To Read: <input type="checkbox" ng-model="iBook.toRead" ng-change="addBook(iBook, $index)"/>
+				Recommended: <input type="checkbox" ng-model="iBook.recommended" ng-change="addBook(iBook, $index)"/>	
 			</div>
 			</li>
 			</ul>

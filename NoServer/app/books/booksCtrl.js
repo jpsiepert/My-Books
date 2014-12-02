@@ -51,12 +51,12 @@ $scope.gridOptions = {
       data: 'bookData',
       filterOptions: $scope.filterOptions,
       height: '110px',
-      sortInfo: {fields: ["Artist, Collection", "AlbumArt", "Add Book"], directions:["asc"]},
+      sortInfo: {fields: ["Artist, Collection", "AlbumArt", "Add Book"]},
       columnDefs: [
         {field: 'Artist', displayName: 'Author'},
         {field: 'Collection', displayName: 'Title'},
         {field: "AlbumArt", displayName: "Book Art", cellTemplate: '<div class="ngCellText" ng-class="col.colIndex()"><img ng-src="{{row.getProperty(col.field)}}"></div>'},
-        {field: "AddBook", displayName: "Add Book", cellTemplate: '<button ng-show="itunesButton" ng-click="addItunesBook($index)">Add Book</button>'}
+        {field: "AddBook", displayName: "Add Book", cellTemplate: '<button ng-show="itunesButton" ng-click="addItunesBook(row.rowIndex)">Add Book</button>'}
       ],
     };
 
@@ -76,7 +76,7 @@ $scope.gridOptions = {
       $scope.bookData = iTunesData;
       console.log($scope.bookData);
       for(var i=0; i < $scope.bookData.length; i++) {
-        var tempObj = new BookConst($scope.bookData[i])
+        var tempObj = new BookConst($scope.bookData[i], i)
         displayBookArray.push(tempObj);
       }
       $scope.bookData = displayBookArray;
@@ -86,7 +86,7 @@ $scope.gridOptions = {
   $scope.searchItunes = !scope.searchItunes
  }
 
- var BookConst = function(obj){
+ var BookConst = function(obj, i){
   this.AlbumArt = obj.artworkUrl100;
   this.Collection = obj.trackName;
   this.Artist = obj.artistName;
@@ -99,16 +99,22 @@ $scope.gridOptions = {
   }
 
   $scope.books = booksReference
+  $scope.iBooks = [];
 
-  $scope.addItunesBook = function(index){
-    $scope.books.$add(displayBookArray[index]);
-    // $scope.itunesButton = false;
+  $scope.addItunesBook = function(i){
+    console.log("i", i)
+    $scope.iBooks.push(displayBookArray[i]);
+    $scope.addBookForm = false;
+    $scope.searchItunes = false;
+    $scope.search.query = '';
+    $scope.bookData = [];
   }
 
-  $scope.addBook = function(){
+  $scope.addBook = function(iBook, i){
     debugger;
-    $scope.books.$add($scope.book)
+    $scope.books.$add(iBook)
     $scope.book = '';
+    $scope.iBooks.splice(i, 1)
   }
   $scope.removeBook = function(book){
     $scope.books.$remove(book);
