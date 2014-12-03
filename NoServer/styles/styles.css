@@ -18,9 +18,13 @@ body {
 	
 }
 
-
+.nav-border {
+	padding-bottom: 15px;
+	border-bottom: 1px white solid;
+}
 .nav-color {
- background-color:#FFD500;
+ background-color:#B04441;
+ 
 }
 
 .navfont{
@@ -69,6 +73,7 @@ span {
 
 .btn-own {
 	background: #871D1A;
+	color: white;
 }
 
 .search-books {
@@ -76,9 +81,15 @@ span {
 	float: left;
 }
 
-/*a p {
-	text-align: left;
-}*/
+
+.check-boxes-button {
+
+	font-size: 20px;
+}
+
+.check-boxes {
+	font-size: 15px;
+}
 
 .book-columns {
 	color: #fff;
@@ -138,19 +149,21 @@ a:hover{
 	/*background: rgba(90, 90, 110, .7);*/
 	color: white;
 	padding-left: 13px;
+	font-size: 20px;
 	/*min-height: 250px;
 	width: auto;
 	float: inherit;
 	color: white;*/
 }
 
+
 .book-list-item {
-	background: rgba(255, 213, 0, .8);
+	background: #B04441;
 
 }
 
 .book-list-item a{
-	color: #B04441;
+	color: white;
 }
 button {
 	color: black;

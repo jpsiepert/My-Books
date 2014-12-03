@@ -4,10 +4,7 @@ app.controller("booksCtrl", function($scope, $location, mainService, bookService
 
   $scope.addBookForm = true;
   $scope.mainbuttons = false;
-  $scope.recommended = true;
-  $scope.toRead = true;
-  $scope.read = true;
-  $scope.own = true;
+  $scope.bookLists = true;
   $scope.searchItunes = false;
   $scope.bookDetails = false;
   $scope.itunesButton = true;
@@ -83,6 +80,7 @@ $scope.gridOptions = {
   }
   
   $scope.searchItunes = !scope.searchItunes
+  $scope.bookLists = false;
  }
 
  var BookConst = function(obj, i){
@@ -103,6 +101,7 @@ $scope.gridOptions = {
     $scope.iBooks.$add(displayBookArray[i]);
     $scope.addBookForm = false;
     $scope.searchItunes = false;
+    $scope.bookLists = true;
     $scope.search.query = '';
     $scope.bookData = [];
   }

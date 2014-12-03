@@ -1,7 +1,7 @@
 
 
 <div class="Navigation">
-		<nav class="navbar nav-color navbar-fixed-top" role="navigation"><!-- {{test}}{{env}} -->
+		<nav class="navbar nav-color navbar-fixed-top nav-border" role="navigation">
 			<form class="navbar-form">
 				
 				<span class="navfont">
@@ -11,13 +11,13 @@
 				</br>
 				
 				<div class="book-buttons">
-					<button class="btn btn-own" ng-click="gotoOwn()">Own</button>
+					<button class="btn btn-own" ng-click="logout()">Logout</button>
 					
-					<button class="btn btn-recs" ng-click="gotoRecommendations()">Recommendations</button>
+					<!-- <button class="btn btn-recs" ng-click="gotoRecommendations()">Recommendations</button>
 					
 					<button class="btn btn-read" ng-click="gotoRead()">Read</button>
 					
-					<button class="btn btn-to-read" ng-click="gotoToRead()">To Read</button>
+					<button class="btn btn-to-read" ng-click="gotoToRead()">To Read</button> -->
 				<!-- <a><p style="color: white" ng-click="logOut()">Log Out </p></a> -->
 				</div>
 			
@@ -28,13 +28,12 @@
 					
 					<input class="form-control" type="text" placeholder="Find Books" ng-model="search.query"/>
 					
-					<button class='btn btn-info add-iBook'ng-click="getBookData()">
+					<button class='btn btn-own add-iBook'ng-click="getBookData()">
 						Find Book
 					</button>
 				
 				</div>
 			</form>
-
 
 		</nav>
 	</div>
@@ -60,7 +59,7 @@
 		
 		<div class="col-md-9 add-books ">
 
-			<button class="btn btn-info show-add-books" ng-click="showAddBook()">Add Book</button>
+			<button class="btn btn-own show-add-books" ng-click="showAddBook()">Add Book</button>
 		
 			<div class="adding-books" ng-hide="addBookForm">
 				<input type="text" ng-model="book.name" placeholder="add a book" />
@@ -92,53 +91,62 @@
 	</div>
 	
 	
-	<div class="row" >
-		<div class="col-md-6 list-group book-list read" ng-show="read">
+	<div class="row" ng-show="bookLists">
+		<div class="col-md-6 list-group book-list read">
 			<h3 class='list-group-item-heading'>Books I've Read!</h3>
 			
 			<ul class='list-group-item book-list-item' ng-repeat='book in books | filter: {read: true}'>
 				<li>
-				<a ng-click="showBookDetails(book)">{{book.name}}</a>
+				<a ng-click="showBookDetails(book)"><em>{{book.name}}</em></a>
 				<a ng-click="showBookDetails(book)"><img src="{{book.AlbumArt}}"/></a>
 				<br/>
-				<a ng-click="showBookDetails(book)">{{book.Collection}}</a>
+				<a ng-click="showBookDetails(book)"><em>{{book.Collection}}</em></a>
 				<br/>
-				<button ng-click="checkBoxes = !checkBoxes">Change Book Status</button/>
+				<a ng-click="checkBoxes = !checkBoxes"><i class="fa fa-caret-square-o-down check-boxes-button"></i></a>
+				<a ng-click="removeBook(book)"><i class="fa fa-trash check-boxes-button"></i></a>
 					<div class="check-boxes" ng-show="checkBoxes">
-					<br/>Own: <input type="checkbox" ng-model="book.own" ng-change="updateBook(book)"/>
+					<br/>
+					Own: <input type="checkbox" ng-model="book.own" ng-change="updateBook(book)"/>
+					
 					Read: <input type = "checkbox" ng-model="book.read" ng-change="updateBook(book)"/>
-					<br/>
+					
 					To Read: <input type="checkbox" ng-model="book.toRead" ng-change="updateBook(book)"/>
-					<br/>
+					
 					Recommended: <input type="checkbox" ng-model="book.recommended" ng-change="updateBook(book)"/>
-					<br/>
-					Comments: <input type="text" ng-model="book.comments" placeholder="notes"/><button ng-click="addBookComments()">Submit</button>
-					<button ng-click="removeBook(book)">Remove Book</button>
+				
 					</div>
 				</li>
 			</ul>
 		</div>
 
 
-		<div class="col-md-6 book-list own list-group" ng-show='own'>
+		<div class="col-md-6 book-list own list-group">
 				<h3 class='list-group-item-heading'>Books I Own!</h3>
 				<ul class='list-group-item book-list-item' ng-repeat="book in books | filter: {own: true}">
 					<li>
 					<a ng-click="showBookDetails(book)">{{book.name}}</a>
+					
 					<a ng-click="showBookDetails(book)"><img src="{{book.AlbumArt}}"/></a>
 					<br/>
-					<button ng-click="checkBoxes = !checkBoxes">Change Book Status</button/>
+					
+					<a ng-click="showBookDetails(book)"><em>{{book.Collection}}</em></a>
+					<br/>
+					
+					<a ng-click="checkBoxes = !checkBoxes"><i class="fa fa-caret-square-o-down check-boxes-button"></i></a>
+					
+					<a ng-click="removeBook(book)"><i class="fa fa-trash check-boxes-button"></i></a>
+						
 						<div class="check-boxes" ng-show="checkBoxes">
 						Own: <input type="checkbox" ng-model="book.own" ng-change="updateBook(book)"/>
-						<br/>
+						
 						Read: <input type = "checkbox" ng-model="book.read" ng-change="updateBook(book)"/>
-						<br/>
+						
 						To Read: <input type="checkbox" ng-model="book.toRead" ng-change="updateBook(book)"/>
-						<br/>
+					
 						Recommended: <input type="checkbox" ng-model="book.recommended" ng-change="updateBook(book)"/>
-						<br/>
-						Comments: <input type="text" ng-model="book.comments" placeholder="notes"/><button ng-click="addBookComments()">Submit</button>
-						<button ng-click="removeBook(book)">Remove Book</button>
+						
+					
+						
 						</div>
 					</li>
 				</ul>
@@ -147,63 +155,74 @@
 		</div>
 
 
- 	<div class = "row">
-		<div class="col-md-6 list-group book-list to-read" ng-show="toRead">
+ 	<div class = "row" ng-show="bookLists">
+		<div class="col-md-6 list-group book-list">
 		<h3 class='list-group-item-heading'>To Be Read </h3>
-		<ul class='list-group-item book-list-item'>
-			<li ng-repeat="book in books | filter: {toRead: true}">
-			<a ng-click="showBookDetails(book)">{{book.name}}</a>
-			<a ng-click="showBookDetails(book)"><img src="{{book.AlbumArt}}"/></a>
-			<br/>
-			<button ng-click="checkBoxes = !checkBoxes">Change Book Status</button/>
-				
-				<div class="check-boxes" ng-show="checkBoxes">
-				Own: <input type="checkbox" ng-model="book.own" ng-change="updateBook(book)"/>
-				<br/>
-				Read: <input type = "checkbox" ng-model="book.read" ng-change="updateBook(book)"/>
-				<br/>
-				To Read: <input type="checkbox" ng-model="book.toRead" ng-change="updateBook(book)"/>
-				<br/>
-				Recommended: <input type="checkbox" ng-model="book.recommended" ng-change="updateBook(book)"/>
-				<br/>
-				Comments: <input type="text" ng-model="book.comments" placeholder="notes"/><button ng-click="addBookComments()">Submit</button>
-				<button ng-click="removeBook(book)">Remove Book</button>
-				</div>
-			
-			</li>
-		</ul>
+		<ul class='list-group-item book-list-item' ng-repeat="book in books | filter: {toRead: true}">
+					<li>
+					<a ng-click="showBookDetails(book)">{{book.name}}</a>
+					
+					<a ng-click="showBookDetails(book)"><img src="{{book.AlbumArt}}"/></a>
+					<br/>
+					
+					<a ng-click="showBookDetails(book)"><em>{{book.Collection}}</em></a>
+					<br/>
+					
+					<a ng-click="checkBoxes = !checkBoxes"><i class="fa fa-caret-square-o-down check-boxes-button"></i></a>
+					
+					<a ng-click="removeBook(book)"><i class="fa fa-trash check-boxes-button"></i></a>
+						
+						<div class="check-boxes" ng-show="checkBoxes">
+						Own: <input type="checkbox" ng-model="book.own" ng-change="updateBook(book)"/>
+						
+						Read: <input type = "checkbox" ng-model="book.read" ng-change="updateBook(book)"/>
+						
+						To Read: <input type="checkbox" ng-model="book.toRead" ng-change="updateBook(book)"/>
+					
+						Recommended: <input type="checkbox" ng-model="book.recommended" ng-change="updateBook(book)"/>
+						
+					
+						
+						</div>
+					</li>
+				</ul>
 			
 		</div>
 
 
 		
-	<div class="col-md-6 list-group book-list recommended" ng-show="recommended">
+	<div class="col-md-6 list-group book-list recommended">
 		
 		<h3 class='list-group-item-heading'>Recommended to you</h3>
 		
-		<ul class='list-group-item book-list-item'>
-			<li ng-repeat="book in books | filter: {recommended: true}">
-			
-			<a ng-click="showBookDetails(book)">{{book.name}}</a>
-			<a ng-click="showBookDetails(book)"><img src="{{book.AlbumArt}}"/></a>
-			
-			<br/>
-			
-			<button ng-click="checkBoxes = !checkBoxes">Change Book Status</button/>
-				<div class="check-boxes" ng-show="checkBoxes">
-				Own: <input type="checkbox" ng-model="book.own" ng-change="updateBook(book)"/>
-				<br/>
-				Read: <input type = "checkbox" ng-model="book.read" ng-change="updateBook(book)"/>
-				<br/>
-				To Read: <input type="checkbox" ng-model="book.toRead" ng-change="updateBook(book)"/>
-				<br/>
-				Recommended: <input type="checkbox" ng-model="book.recommended" ng-change="updateBook(book)"/>
-				<br/>
-				Comments: <input type="text" ng-model="book.comments" placeholder="notes"/><button ng-click="addBookComments()">Submit</button>
-				<button ng-click="removeBook(book)">Remove Book</button>
-				</div>
-			</li>
-		</ul>
+		<ul class='list-group-item book-list-item' ng-repeat="book in books | filter: {recommended: true}">
+					<li>
+					<a ng-click="showBookDetails(book)">{{book.name}}</a>
+					
+					<a ng-click="showBookDetails(book)"><img src="{{book.AlbumArt}}"/></a>
+					<br/>
+					
+					<a ng-click="showBookDetails(book)"><em>{{book.Collection}}</em></a>
+					<br/>
+					
+					<a ng-click="checkBoxes = !checkBoxes"><i class="fa fa-caret-square-o-down check-boxes-button"></i></a>
+					
+					<a ng-click="removeBook(book)"><i class="fa fa-trash check-boxes-button"></i></a>
+						
+						<div class="check-boxes" ng-show="checkBoxes">
+						Own: <input type="checkbox" ng-model="book.own" ng-change="updateBook(book)"/>
+						
+						Read: <input type = "checkbox" ng-model="book.read" ng-change="updateBook(book)"/>
+						
+						To Read: <input type="checkbox" ng-model="book.toRead" ng-change="updateBook(book)"/>
+					
+						Recommended: <input type="checkbox" ng-model="book.recommended" ng-change="updateBook(book)"/>
+						
+					
+						
+						</div>
+					</li>
+				</ul>
 			
 		</div>
 	</div>
