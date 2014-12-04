@@ -89,7 +89,8 @@ $scope.gridOptions = {
   this.Artist = obj.artistName;
  }
   
-  $scope.logOut = function(){
+  $scope.logout = function(){
+
     mainService.logOut()
     $location.path("/")
   }

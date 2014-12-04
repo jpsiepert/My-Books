@@ -2,7 +2,7 @@ var app = angular.module("myBooks")
 
 app.service("mainService", function($firebase){
 	
-	var fbUrl = "https://boiling-heat-705.firebaseio.com/";
+	var fbUrl = "https://my-book-collection.firebaseio.com/";
 	
 	var fbLogin = new Firebase(fbUrl);
 

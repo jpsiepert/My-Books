@@ -52,19 +52,31 @@
 
 
 	
-	<h3 class="welcome-greeting">Hello, {{user.name}}</h3>
+	
 
 <div class='container'>
 	<div class="row">
-		
-		<div class="col-md-9 add-books ">
+		<div class='col-md-12'>
+			<h3 class="welcome-greeting">Hello, {{user.name}}</h3>
+		</div>
+	</div>
+
+	<div class='row'>
+		<div class="col-md-12 add-books">
 
 			<button class="btn btn-own show-add-books" ng-click="showAddBook()">Add Book</button>
-		
-			<div class="adding-books" ng-hide="addBookForm">
-				<input type="text" ng-model="book.name" placeholder="add a book" />
-
-				<button ng-click="addBook()">Add Book to List</button>
+			
+			<div class='row'>
+				<div class='col-sm-6 col-sm-offset-3'>
+					<div class="adding-books input-group" ng-hide="addBookForm">
+						<input class='form-control' type="text" ng-model="book.name" placeholder="add a book" />
+						<span class='input-group-btn'>
+							<button class='btn btn-own' ng-click="addBook()">Add Book to List</button>
+						</span>
+					</div>
+				</div>
+			</div>
+				
 				<br />
 				<ul>
 					<li ng-repeat="iBook in iBooks ">

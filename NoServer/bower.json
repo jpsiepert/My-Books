@@ -1,0 +1,36 @@
+{
+  "name": "My-Book-Collection",
+  "version": "0.0.0",
+  "homepage": "my-book-collection.firebaseapp.co",
+  "authors": [
+    "Jennifer Siepert <jpsiepert@yahoo.com>"
+  ],
+  "description": "Book Organization",
+  "main": "index.html",
+  "keywords": [
+    "books",
+    "collection"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "firebase-simple-login": "~1.6.4",
+    "jquery": "~2.1.1",
+    "angular": "~1.3.5",
+    "bootstrap": "~3.3.1",
+    "font-awesome": "~4.2.0",
+    "ng-grid": "~2.0.14",
+    "angular-route": "~1.3.5",
+    "angularfire": "~0.9.0"
+  },
+  "resolutions": {
+    "firebase": "2.0.x"
+  }
+}
