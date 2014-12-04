@@ -1,6 +1,6 @@
 var app = angular.module("myBooks");
 
-app.controller("booksCtrl", function($scope, $location, mainService, bookService, booksReference, iBooksReference){
+app.controller("booksCtrl", function($scope, $timeout, $location, mainService, bookService, booksReference, iBooksReference){
 
   $scope.addBookForm = true;
   $scope.mainbuttons = false;
@@ -8,6 +8,8 @@ app.controller("booksCtrl", function($scope, $location, mainService, bookService
   $scope.searchItunes = false;
   $scope.bookDetails = false;
   $scope.itunesButton = true;
+  $scope.findBook = true;
+  $scope.hideBook = false;
 
 
   $scope.showAddBook = function(){
@@ -15,29 +17,10 @@ app.controller("booksCtrl", function($scope, $location, mainService, bookService
   }
 
   $scope.toggleCheckBoxes = function(index){
-    debugger
+
     $scope.checkBoxes[index] === true;
   }
   
-  $scope.gotoRecommendations = function(){
-   $scope.recommended = !$scope.recommended
-  }
-  
-  $scope.gotoToRead = function() {
-    $scope.toRead = !$scope.toRead;
-  }
-  
-  $scope.gotoRead = function(){
-    $scope.read = !$scope.read;
-  }
-  
-  $scope.gotoOwn = function(){
-    $scope.own = !$scope.own
-  }
-
-  // $scope.showSearchItunes = function(){
-  //   $scope.searchItunes = !$scope.searchItunes
-  // }
   $scope.filterOptions = {
     filterText: ''
   }
@@ -66,6 +49,8 @@ $scope.gridOptions = {
  $scope.bookData = displayBookArray; 
  
  $scope.getBookData = function(){
+  $scope.findBook = false;
+  $scope.hideBook = true;
   $scope.searchItunes = true;
   if($scope.search.query.length > 2) {
     bookService.getBookData($scope.search)
@@ -101,19 +86,35 @@ $scope.gridOptions = {
   $scope.addItunesBook = function(i){
     $scope.iBooks.$add(displayBookArray[i]);
     $scope.addBookForm = false;
-    $scope.searchItunes = false;
+    
     $scope.bookLists = true;
     $scope.search.query = '';
-    $scope.bookData = [];
+    
+  }
+   $scope.addBook = function(iBook){
+
+    $scope.iBooks.$add(iBook)
+    $scope.iBook = '';
+ 
   }
 
-  $scope.addBook = function(iBook, i){
-    $scope.books.$add(iBook)
-    $scope.book = '';
-    $scope.iBooks.$remove(iBook)
-  }
+  $scope.hideItunesSearch = function(){
+   $scope.findBook = true;
+    $scope.hideBook = false;
+    $scope.searchItunes = false;
+    $scope.bookData = [];
+}
+ 
+ $scope.saveBook = function(iBook){
+  $scope.books.$add(iBook)
+  $scope.iBooks.$remove(iBook)
+ }
   $scope.removeBook = function(book){
     $scope.books.$remove(book);
+  }
+
+  $scope.removeDisplayBook = function(iBook){
+    $scope.iBooks.$remove(iBook)
   }
   $scope.updateBook = function(book){
     $scope.books.$save(book);

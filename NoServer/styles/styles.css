@@ -59,7 +59,7 @@ span {
 	margin: 0 auto;
 }
 
-.btn-recs {
+/*.btn-recs {
  background: #B04441;
 }
 
@@ -69,11 +69,27 @@ span {
 
 .btn-read {
 	background: #DB7674;
-}
+}*/
 
 .btn-own {
 	background: #871D1A;
 	color: white;
+}
+
+.btn-own:hover {
+	color: gray;
+}
+
+.btn-add {
+	background: #871D1A;
+	color: white;
+	padding: 22px;
+	font-size: 15px;
+
+}
+
+.btn-add:hover {
+	color: gray;
 }
 
 .search-books {
@@ -83,7 +99,7 @@ span {
 
 
 .check-boxes-button {
-
+	color: white;
 	font-size: 20px;
 }
 
@@ -165,8 +181,9 @@ a:hover{
 .book-list-item a{
 	color: white;
 }
-button {
-	color: black;
+
+.un-sorted-books {
+	background-color: #171C60;
 }
 
 html, body {

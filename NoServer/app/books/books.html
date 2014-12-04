@@ -13,12 +13,6 @@
 				<div class="book-buttons">
 					<button class="btn btn-own" ng-click="logout()">Logout</button>
 					
-					<!-- <button class="btn btn-recs" ng-click="gotoRecommendations()">Recommendations</button>
-					
-					<button class="btn btn-read" ng-click="gotoRead()">Read</button>
-					
-					<button class="btn btn-to-read" ng-click="gotoToRead()">To Read</button> -->
-				<!-- <a><p style="color: white" ng-click="logOut()">Log Out </p></a> -->
 				</div>
 			
 			
@@ -28,8 +22,10 @@
 					
 					<input class="form-control" type="text" placeholder="Find Books" ng-model="search.query"/>
 					
-					<button class='btn btn-own add-iBook'ng-click="getBookData()">
+					<button ng-show='findBook' class='btn btn-own add-iBook'ng-click="getBookData()">
 						Find Book
+					</button>
+					<button ng-show='hideBook' class='btn btn-own add-iBook' ng-click='hideItunesSearch()'>Hide Books
 					</button>
 				
 				</div>
@@ -69,31 +65,40 @@
 			<div class='row'>
 				<div class='col-sm-6 col-sm-offset-3'>
 					<div class="adding-books input-group" ng-hide="addBookForm">
-						<input class='form-control' type="text" ng-model="book.name" placeholder="add a book" />
+						
+						<input class='form-control' type="text" ng-model="iBook.name" placeholder="Book Title" />
+						<input class='form-control' type='text' ng-model='iBook.author' placeholder='Book Author' />
 						<span class='input-group-btn'>
-							<button class='btn btn-own' ng-click="addBook()">Add Book to List</button>
+							<button class='btn btn-add' ng-click="addBook(iBook)">Add Book to List</button>
 						</span>
+					
 					</div>
 				</div>
 			</div>
 				
 				<br />
-				<ul>
-					<li ng-repeat="iBook in iBooks ">
-						{{iBook.name}}
+				<ul class='col-md-6 col-md-offset-3'>
+					<li ng-repeat="iBook in iBooks" class='un-sorted-books'>
+						{{iBook.Collection}}
+						{{iBook.name.toUpperCase()}}
 						<img src="{{iBook.AlbumArt}}"/>
 					
 						<div ng-class="check-boxes">
 							
-							Own: <input type="checkbox" ng-model="iBook.own" ng-change="addBook(iBook, $index)"/>
+							Own: <input type="checkbox" ng-model="iBook.own" />
 						
-							Read: <input type = "checkbox" id="tyler" ng-model="iBook.read" ng-change="addBook(iBook, $index)"/>
+							Read: <input type = "checkbox" id="tyler" ng-model="iBook.read" />
 						
-							To Read: <input type="checkbox" ng-model="iBook.toRead" ng-change="addBook(iBook, $index)"/>
+							To Read: <input type="checkbox" ng-model="iBook.toRead" />
 						
-							Recommended: <input type="checkbox" ng-model="iBook.recommended" ng-change="addBook(iBook, $index)"/>	
-						
+							Reading: <input type="checkbox" ng-model="iBook.reading"/>
+							
+							<a ng-click="saveBook(iBook)"><i class="fa fa-floppy-o check-boxes-button" style='font-size: 20px'></i></a>
+
+							<a ng-click="removeDisplayBook(iBook)"><i class="fa fa-trash check-boxes-button"></i></a>
+							
 						</div>
+						<hr>
 					</li>
 				</ul>
 			</div>
@@ -124,7 +129,7 @@
 					
 					To Read: <input type="checkbox" ng-model="book.toRead" ng-change="updateBook(book)"/>
 					
-					Recommended: <input type="checkbox" ng-model="book.recommended" ng-change="updateBook(book)"/>
+					Reading: <input type="checkbox" ng-model="book.reading" ng-change="updateBook(book)"/>
 				
 					</div>
 				</li>
@@ -155,7 +160,7 @@
 						
 						To Read: <input type="checkbox" ng-model="book.toRead" ng-change="updateBook(book)"/>
 					
-						Recommended: <input type="checkbox" ng-model="book.recommended" ng-change="updateBook(book)"/>
+						Reading: <input type="checkbox" ng-model="book.reading" ng-change="updateBook(book)"/>
 						
 					
 						
@@ -191,7 +196,7 @@
 						
 						To Read: <input type="checkbox" ng-model="book.toRead" ng-change="updateBook(book)"/>
 					
-						Recommended: <input type="checkbox" ng-model="book.recommended" ng-change="updateBook(book)"/>
+						Reading: <input type="checkbox" ng-model="book.reading" ng-change="updateBook(book)"/>
 						
 					
 						
@@ -203,11 +208,11 @@
 
 
 		
-	<div class="col-md-6 list-group book-list recommended">
+	<div class="col-md-6 list-group book-list reading">
 		
-		<h3 class='list-group-item-heading'>Recommended to you</h3>
+		<h3 class='list-group-item-heading'>Currently Reading</h3>
 		
-		<ul class='list-group-item book-list-item' ng-repeat="book in books | filter: {recommended: true}">
+		<ul class='list-group-item book-list-item' ng-repeat="book in books | filter: {reading: true}">
 					<li>
 					<a ng-click="showBookDetails(book)">{{book.name}}</a>
 					
@@ -228,7 +233,7 @@
 						
 						To Read: <input type="checkbox" ng-model="book.toRead" ng-change="updateBook(book)"/>
 					
-						Recommended: <input type="checkbox" ng-model="book.recommended" ng-change="updateBook(book)"/>
+						Reading: <input type="checkbox" ng-model="book.reading" ng-change="updateBook(book)"/>
 						
 					
 						
