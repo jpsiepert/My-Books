@@ -1,26 +1,26 @@
 var app = angular.module("myBooks");
 
 app.controller("mainCtrl", function($scope, $location, mainService, EnvironmentService){
- $scope.test = "test";
+
  $scope.env = EnvironmentService.getEnv();
 
- $scope.mainbuttons = true;;//is there a way to write an if statement for if location !/ then false;
- //moved the buttons to home.html instead of the index.html
+
  
- $scope.loginForm = false;
+ $scope.loginForm = true;
  $scope.theSignUpForm = false;
 
   $scope.showSignupForm = function(){
- 		$scope.theSignUpForm = !$scope.theSignUpForm
+ 		$scope.theSignUpForm = true;
  		$scope.mainbuttons = false;
+    $scope.loginForm = false;
  }
 
  $scope.showloginForm = function(){
- 	console.log("showing form")
- 	$scope.loginForm = !$scope.loginForm
- 	$scope.mainbuttons = !$scope.mainbuttons
+ 	$scope.loginForm = true;
+  $scope.theSignUpForm = false;
  	$scope.login = ''
  };
+
 $scope.register = function(){
   return mainService.register($scope.signUp, function(user){
     user.uid = user.uid.replace('simplelogin:', '');

@@ -39,6 +39,12 @@ nav button {
 	margin-right: 10px;
 }
 
+.login-form {
+	background-color: #170871;
+	color: white;
+	width: 50%;
+	padding: 8px 10px;
+}
 .btn-sign-up {
 	background: #1ED86F;
 	
