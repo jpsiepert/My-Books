@@ -25,12 +25,12 @@ app.service("mainService", function($firebase){
 	};
 
  this.register = function(user, cb){
+ 	var message;
 		fbLogin.createUser({
 			email: user.email,
 			password: user.password
 		}, function(error) {
 			if (error === null) {
-				console.log("User created successfully");
 				fbLogin.authWithPassword({
 						email    : user.email,
 						password : user.password
@@ -40,14 +40,15 @@ app.service("mainService", function($firebase){
 				  	authData.userId = authData.uid.replace("simplelogin:", "");
 				    fbLogin.child('users').child(authData.uid.replace('simplelogin:', '')).set(authData);
 				    setUser(authData);
-				    cb(authData);
+				    cb(authData, message);
 				  } else {
-				  	console.log('something went wrong');
+				  	message = "Something went wrong, please try again";
+				  	cb(null, message);
 				  }
 				});
 			} else {
-				console.log("Error creating user:", error);
-				return false;
+				message = "E-mail already in use";
+				cb(null, message)
 			}
 		});
 	}
@@ -72,9 +73,22 @@ app.service("mainService", function($firebase){
 			    cb(authData); //gives the authenticated user to our callback
 			}
 		});
-	}
+	};
 
-	
+	this.resetPassword = function(user, cb){
+		debugger;
+		fbUrl.resetPassword({
+		    email : user
+		  }, function(error) {
+		  if (error === null) {
+		    console.log("Password reset email sent successfully");
+		    cb(null)
+		  } else {
+		    console.log("Error sending password reset email:", error);
+		    cb(error)
+		  }
+		});
+	};
 
 	this.getUser = function(userId){
 		return $firebase(new Firebase(fbUrl + 'users/' + userId)).$asObject();
