@@ -1,7 +1,7 @@
 var app = angular.module("myBooks");
 
 app.controller("booksCtrl", function($scope, $timeout, $location, mainService, bookService, booksReference, iBooksReference){
-console.log($scope.user)
+
   $scope.addBookForm = true;
   $scope.mainbuttons = false;
   $scope.bookLists = true;
@@ -43,18 +43,15 @@ $scope.gridOptions = {
       ],
     };
 
- var displayBookArray = [];
- var addBookToList = function(){
-  //needs to take active column
-  //add the author, book name, book art to list(i.e. owned, or read)
- }
-  
- $scope.bookData = displayBookArray; 
+ 
+  var displayBookArray = [];
+ // $scope.bookData = displayBookArray; 
  
  $scope.getBookData = function(){
-  $scope.findBook = false;
+  displayBookArray = [];
   $scope.hideBook = true;
   $scope.searchItunes = true;
+
   if($scope.search.query.length > 2) {
     bookService.getBookData($scope.search)
     .then(function(iTunesData){
@@ -67,8 +64,9 @@ $scope.gridOptions = {
     })
   }
   
-  $scope.searchItunes = !scope.searchItunes
+
   $scope.bookLists = false;
+
  }
 
  var BookConst = function(obj, i){
