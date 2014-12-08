@@ -81,9 +81,13 @@
 				<br />
 				<ul class='col-md-6 col-md-offset-3'>
 					<li ng-repeat="iBook in iBooks" class='un-sorted-books'>
-						{{iBook.Collection}}
+					
 						{{iBook.name.toUpperCase()}}
+						<br/>
 						<img src="{{iBook.AlbumArt}}"/>
+						<br />
+						<strong>{{iBook.Collection}}</strong> by: <i>{{iBook.Artist}}</i>
+
 					
 						<div ng-class="check-boxes">
 							
@@ -113,14 +117,21 @@
 	<div class="row" ng-show="bookLists">
 		<div class="col-md-6 list-group book-list read">
 			<h3 class='list-group-item-heading'>Books I've Read!</h3>
+			<input class="form-control" placeholder="Search!" ng-model="readSearch">
 			
-			<ul class='list-group-item book-list-item' ng-repeat='book in books | filter: {read: true}'>
+			<ul class='list-group-item book-list-item' ng-repeat='book in books | filter: {read: true} | filter: readSearch'>
 				<li>
 				<a ng-click="showBookDetails(book)"><em>{{book.name}}</em></a>
+				
+				
 				<a ng-click="showBookDetails(book)"><img src="{{book.AlbumArt}}"/></a>
 				<br/>
+				
 				<a ng-click="showBookDetails(book)"><em>{{book.Collection}}</em></a>
 				<br/>
+				<i>{{book.Artist}} {{book.author}}</i>
+				<br/>
+				
 				<a ng-click="checkBoxes = !checkBoxes"><i class="fa fa-caret-square-o-down check-boxes-button"></i></a>
 				<a ng-click="removeBook(book)"><i class="fa fa-trash check-boxes-button"></i></a>
 					<div class="check-boxes" ng-show="checkBoxes">
@@ -141,7 +152,8 @@
 
 		<div class="col-md-6 book-list own list-group">
 				<h3 class='list-group-item-heading'>Books I Own!</h3>
-				<ul class='list-group-item book-list-item' ng-repeat="book in books | filter: {own: true}">
+				<input class="form-control" placeholder="Search!" ng-model="ownSearch">
+				<ul class='list-group-item book-list-item' ng-repeat="book in books | filter: {own: true} | filter: ownSearch">
 					<li>
 					<a ng-click="showBookDetails(book)">{{book.name}}</a>
 					
@@ -149,6 +161,8 @@
 					<br/>
 					
 					<a ng-click="showBookDetails(book)"><em>{{book.Collection}}</em></a>
+					<br/>
+					<i>{{book.Artist}} {{book.author}}</i>
 					<br/>
 					
 					<a ng-click="checkBoxes = !checkBoxes"><i class="fa fa-caret-square-o-down check-boxes-button"></i></a>
@@ -177,7 +191,10 @@
  	<div class = "row" ng-show="bookLists">
 		<div class="col-md-6 list-group book-list">
 		<h3 class='list-group-item-heading'>To Be Read </h3>
-		<ul class='list-group-item book-list-item' ng-repeat="book in books | filter: {toRead: true}">
+
+		<input class="form-control" placeholder="Search!" ng-model="beReadSearch">
+
+		<ul class='list-group-item book-list-item' ng-repeat="book in books | filter: {toRead: true} | filter: beReadSearch">
 					<li>
 					<a ng-click="showBookDetails(book)">{{book.name}}</a>
 					
@@ -185,6 +202,8 @@
 					<br/>
 					
 					<a ng-click="showBookDetails(book)"><em>{{book.Collection}}</em></a>
+					<br/>
+					<i>{{book.Artist}} {{book.author}}</i>
 					<br/>
 					
 					<a ng-click="checkBoxes = !checkBoxes"><i class="fa fa-caret-square-o-down check-boxes-button"></i></a>
@@ -214,7 +233,9 @@
 		
 		<h3 class='list-group-item-heading'>Currently Reading</h3>
 		
-		<ul class='list-group-item book-list-item' ng-repeat="book in books | filter: {reading: true}">
+		<input class="form-control" placeholder="Search!" ng-model="readingSearch">
+
+		<ul class='list-group-item book-list-item' ng-repeat="book in books | filter: {reading: true} | filter: readingSearch">
 					<li>
 					<a ng-click="showBookDetails(book)">{{book.name}}</a>
 					
@@ -222,6 +243,8 @@
 					<br/>
 					
 					<a ng-click="showBookDetails(book)"><em>{{book.Collection}}</em></a>
+					<br/>
+					<i>{{book.Artist}} {{book.author}}</i>
 					<br/>
 					
 					<a ng-click="checkBoxes = !checkBoxes"><i class="fa fa-caret-square-o-down check-boxes-button"></i></a>

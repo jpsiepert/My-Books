@@ -12,7 +12,6 @@ app.service("mainService", function($firebase){
 	}
 
 	var setUser = function(user){
-		console.log(user)
 		user.uid = user.uid.replace('simplelogin:', '');
 		localStorage.setItem('user', JSON.stringify(user));
 	};
@@ -75,10 +74,10 @@ app.service("mainService", function($firebase){
 		    email : user
 		  }, function(error) {
 		  if (error === null) {
-		    console.log("Password reset email sent successfully");
+		    
 		    cb(null)
 		  } else {
-		    console.log("Error sending password reset email:", error);
+		    
 		    cb(error)
 		  }
 		});
@@ -93,7 +92,7 @@ app.service("mainService", function($firebase){
 		  if (!error) {
 		    cb(user);
 		  } else {
-		    console.log("Error changing password:", error);
+		 
 		    cb(null, error)
 		  }
 		});
