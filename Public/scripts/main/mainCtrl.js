@@ -46,7 +46,8 @@ $scope.register = function(){
       swal({
         title: "Oops!",
         text: "That e-mail is already in use",
-        allowOutsideClick: true
+        allowOutsideClick: true,
+        confirmButtonColor: "#871D1A"
       })
   }
 });
@@ -56,7 +57,8 @@ $scope.register = function(){
 $scope.forgotPassword = function(email){
   if(!email){
     swal({
-      title: "Please enter e-mail"
+      title: "Please enter e-mail",
+      confirmButtonColor: "#871D1A"
     })
   } else {
     swal({
@@ -65,7 +67,8 @@ $scope.forgotPassword = function(email){
       showCancelButton: true,
       confirmButtonText: "Yes! Send Password",
       cancelButtonText: "No! Enter E-mail",
-      closeOnConfirm: false
+      closeOnConfirm: false,
+      confirmButtonColor: "#871D1A"
     },
     function(){
         mainService.resetPassword(email, function(error){
@@ -83,14 +86,25 @@ $scope.openUp = function(){
     if(!user){
       swal({
         title: "Oops!",
-        text: "Invalid E-mail or Password, Please try again."
+        text: "Invalid E-mail or Password, Please try again.",
+        confirmButtonColor: "#871D1A"
       })
       $scope.login = '';
     } else {
- 		user.uid = user.uid.replace('simplelogin:', '')
-	  	$scope.$apply(function(){
-	  		return $location.path("/mybooks/" + user.uid)
-	  	})
+      if(user.password.isTemporaryPassword){
+        user.uid = user.uid.replace('simplelogin:', '')
+        
+        $scope.$apply(function(){
+          return $location.path("/mybooks/" + user.uid + "/profile")
+      })
+      
+      } else {
+   		  user.uid = user.uid.replace('simplelogin:', '')
+  	  	
+        $scope.$apply(function(){
+  	  	  return $location.path("/mybooks/" + user.uid)
+	  	  })
+      }
     }
 	});
 	$scope.login.email = '';

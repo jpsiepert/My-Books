@@ -4,11 +4,11 @@ app.service("mainService", function($firebase){
 	
 	var fbUrl = "https://my-book-collection.firebaseio.com/";
 	
-	var fbLogin = new Firebase(fbUrl);
+	var fbRef = new Firebase(fbUrl);
 
 	this.logOut = function(){
 		localStorage.setItem('user', '');
-		fbLogin.unauth()
+		fbRef.unauth()
 	}
 
 	var setUser = function(user){
@@ -27,19 +27,19 @@ app.service("mainService", function($firebase){
 
  this.register = function(user, cb){
  	var message;
-		fbLogin.createUser({
+		fbRef.createUser({
 			email: user.email,
 			password: user.password
 		}, function(error) {
 			if (error === null) {
-				fbLogin.authWithPassword({
+				fbRef.authWithPassword({
 						email    : user.email,
 						password : user.password
 					}, function(err, authData) {
 				  if (authData) {
 				  	authData.name = user.name;
 				  	authData.userId = authData.uid.replace("simplelogin:", "");
-				    fbLogin.child('users').child(authData.uid.replace('simplelogin:', '')).set(authData);
+				    fbRef.child('users').child(authData.uid.replace('simplelogin:', '')).set(authData);
 				    setUser(authData);
 				    cb(authData, message);
 				  } else {
@@ -55,7 +55,7 @@ app.service("mainService", function($firebase){
 	}
 
 	this.login = function(user, cb){
-		fbLogin.authWithPassword({
+		fbRef.authWithPassword({
 			email    : user.email, 
 			password : user.password
 		}, function(err, authData) {
@@ -71,7 +71,7 @@ app.service("mainService", function($firebase){
 	};
 
 	this.resetPassword = function(user, cb){
-		fbLogin.resetPassword({
+		fbRef.resetPassword({
 		    email : user
 		  }, function(error) {
 		  if (error === null) {
@@ -84,8 +84,19 @@ app.service("mainService", function($firebase){
 		});
 	};
 
-	this.updatePassword = function(email, cb){
-
+	this.updatePassword = function(user, cb){
+		fbRef.changePassword({
+		  email: user.email,
+		  oldPassword : user.oldPassword,
+		  newPassword : user.newPassword
+		}, function(error) {
+		  if (!error) {
+		    cb(user);
+		  } else {
+		    console.log("Error changing password:", error);
+		    cb(null, error)
+		  }
+		});
 	}
 
 	this.getUser = function(userId){
@@ -101,7 +112,7 @@ app.service("mainService", function($firebase){
 	}
 
 	this.getIBooks = function(userId){
-		return $firebase(new Firebase(fbUrl + '/users/' + userId + '/iBooks')).$asArray();
+		return $firebase(new Firebase(fbUrl + 'users/' + userId + '/iBooks')).$asArray();
 	}
 
 })
